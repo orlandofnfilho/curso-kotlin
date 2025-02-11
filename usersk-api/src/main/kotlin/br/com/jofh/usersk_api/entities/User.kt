@@ -4,11 +4,16 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
+@Table(name = "USERS", schema = "dbo", catalog = "Avaliacao")
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
-    val nome: String = "",
+    var id: Long = 0,
+
+    var nome: String = "",
+
     @Temporal(TemporalType.DATE)
-    val dataNascimento: Date
+    var dataNascimento: Date,
+
+    var address: Address?
 )
