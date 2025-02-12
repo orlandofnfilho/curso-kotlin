@@ -12,8 +12,11 @@ data class User(
 
     var nome: String = "",
 
+    var cpfCnpj: String = "",
+
     @Temporal(TemporalType.DATE)
     var dataNascimento: Date,
 
+    @OneToOne(cascade = [CascadeType.ALL])
     var address: Address?
 )

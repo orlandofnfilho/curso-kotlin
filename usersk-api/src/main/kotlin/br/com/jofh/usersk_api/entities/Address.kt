@@ -1,11 +1,7 @@
 package br.com.jofh.usersk_api.entities
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "ADDRESS", schema = "dbo", catalog = "Avaliacao")
