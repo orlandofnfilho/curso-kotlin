@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/users")
-class UsersController(val userService: UserService) {
+class UsersController(private val userService: UserService) {
 
 
     private val log: Logger = LoggerFactory.getLogger(UsersController::class.java)
@@ -23,8 +23,7 @@ class UsersController(val userService: UserService) {
     }
 
     @GetMapping("/{cpfCnpj}")
-    fun findByCpfCnpj(@PathVariable cpfCnpj: String): ResponseEntity<String> {
-        log.debug("CHEGOU AQUI")
-        return ResponseEntity.ok("CPFCNPJ: "+ cpfCnpj)
+    fun findByCpfCnpj(@PathVariable cpfCnpj: String): ResponseEntity<UserDTO> {
+        return ResponseEntity.ok(userService.findUserByCpfCnpj(cpfCnpj).toDTO())
     }
 }
