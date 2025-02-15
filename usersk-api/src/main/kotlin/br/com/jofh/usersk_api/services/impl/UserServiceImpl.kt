@@ -32,7 +32,7 @@ class UserServiceImpl(
 
     @Transactional
     override fun updateUser(user: User): User {
-        var existentUser = this.findUserByCpfCnpj(user.cpfCnpj)
+        val existentUser = this.findUserByCpfCnpj(user.cpfCnpj)
         user.id = existentUser.id
         user.address = viaCepClient.getAddressByCep(user.address!!.cep)
         return userRepository.save(user)
