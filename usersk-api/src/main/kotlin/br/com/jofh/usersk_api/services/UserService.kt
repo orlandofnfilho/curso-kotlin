@@ -6,4 +6,5 @@ interface UserService {
 
     fun saveUser(user: User): User
     fun findUserByCpfCnpj(cpfCnpj: String): User
+    fun updateUser(user: User): User
 }

@@ -12,6 +12,7 @@ data class User(
 
     var nome: String = "",
 
+    @Column(unique = true)
     var cpfCnpj: String = "",
 
     @Temporal(TemporalType.DATE)

@@ -1,8 +1,9 @@
 package br.com.jofh.usersk_api.controllers
 
-import br.com.jofh.usersk_api.dtos.UserDTO
-import br.com.jofh.usersk_api.dtos.toDTO
+import br.com.jofh.usersk_api.dtos.UserRequest
+import br.com.jofh.usersk_api.dtos.UserResponse
 import br.com.jofh.usersk_api.dtos.toDomain
+import br.com.jofh.usersk_api.dtos.toResponse
 import br.com.jofh.usersk_api.services.UserService
 import jakarta.validation.Valid
 import org.slf4j.Logger
@@ -18,12 +19,17 @@ class UsersController(private val userService: UserService) {
     private val log: Logger = LoggerFactory.getLogger(UsersController::class.java)
 
     @PostMapping
-    fun saveUser(@RequestBody @Valid requestDTO: UserDTO ): ResponseEntity<UserDTO>{
-        return ResponseEntity.ok(userService.saveUser(requestDTO.toDomain()).toDTO());
+    fun saveUser(@RequestBody @Valid requestDTO: UserRequest ): ResponseEntity<UserResponse>{
+        return ResponseEntity.ok(userService.saveUser(requestDTO.toDomain()).toResponse());
     }
 
     @GetMapping("/{cpfCnpj}")
-    fun findByCpfCnpj(@PathVariable cpfCnpj: String): ResponseEntity<UserDTO> {
-        return ResponseEntity.ok(userService.findUserByCpfCnpj(cpfCnpj).toDTO())
+    fun findByCpfCnpj(@PathVariable cpfCnpj: String): ResponseEntity<UserResponse> {
+        return ResponseEntity.ok(userService.findUserByCpfCnpj(cpfCnpj).toResponse())
+    }
+
+    @PutMapping
+    fun updateUser(@RequestBody @Valid requestDTO: UserRequest ): ResponseEntity<UserResponse>{
+        return ResponseEntity.ok(userService.updateUser(requestDTO.toDomain()).toResponse());
     }
 }

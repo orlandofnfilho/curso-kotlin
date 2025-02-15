@@ -9,32 +9,33 @@ import jakarta.validation.constraints.NotBlank
 import java.util.*
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-data class UserDTO(
+data class UserRequest(
     @field:NotBlank
     var nome: String,
 
     var cpfCnpj: String,
 
     @JsonProperty("data-nascimento")
-    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = "America/Sao_Paulo")
     var dataNascimento: Date,
 
-    var cep: String? = null,
+    var cep: String? = null
 )
 
-fun User.toDTO(): UserDTO =
-    UserDTO(
+fun User.toResponse(): UserResponse =
+    UserResponse(
+        id = this.id,
         nome = this.nome,
         cpfCnpj = this.cpfCnpj,
-        dataNascimento = this.dataNascimento
+        dataNascimento = this.dataNascimento,
+        address = this.address
     )
 
-fun UserDTO.toDomain(): User =
+fun UserRequest.toDomain(): User =
     User(
         nome = this.nome,
         cpfCnpj = this.cpfCnpj,
         dataNascimento = this.dataNascimento,
         address = this.cep?.let { Address(cep = it) }
     )
-
 
