@@ -38,5 +38,11 @@ class UserServiceImpl(
         return userRepository.save(user)
     }
 
+    @Transactional
+    override fun deleteUser(cpfCnpj: String) {
+        val user = this.userRepository.findByCpfCnpj(cpfCnpj).get();
+        userRepository.delete(user);
+    }
+
 
 }

@@ -25,11 +25,17 @@ class UsersController(private val userService: UserService) {
 
     @GetMapping("/{cpfCnpj}")
     fun findByCpfCnpj(@PathVariable cpfCnpj: String): ResponseEntity<UserResponse> {
-        return ResponseEntity.ok(userService.findUserByCpfCnpj(cpfCnpj).toResponse())
+        return ResponseEntity.ok(userService.findUserByCpfCnpj(cpfCnpj).toResponse());
     }
 
     @PutMapping
     fun updateUser(@RequestBody @Valid requestDTO: UserRequest ): ResponseEntity<UserResponse>{
         return ResponseEntity.ok(userService.updateUser(requestDTO.toDomain()).toResponse());
+    }
+
+    @DeleteMapping("/{cpfCnpj}")
+    fun deleteUser(@PathVariable cpfCnpj: String): ResponseEntity<Unit> {
+        userService.deleteUser(cpfCnpj);
+        return ResponseEntity.noContent().build();
     }
 }
