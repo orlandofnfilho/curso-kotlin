@@ -1,6 +1,7 @@
-package br.com.jofh.usersk_api.config
+package br.com.jofh.usersk_api.config.exceptionhandler
 
 import br.com.jofh.usersk_api.config.errors.ErrorResponse
+import io.swagger.v3.oas.annotations.Hidden
 import jakarta.persistence.EntityNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.context.request.WebRequest
 
 @RestControllerAdvice
+@Hidden
 class ControllerExceptionHandler {
 
     private val logger = LoggerFactory.getLogger(ControllerExceptionHandler::class.java)
